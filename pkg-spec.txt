@@ -1,0 +1,33 @@
+THE FOLLOWING IS THE SPECIFICATION OF PACKAGE FILE FOR THE dotfile-manager.
+
+The file should be valid JSON (not just Javascript, but JSON). Values surrounded
+by '<>' are used to indicate what the value should store. The file's name should
+be stored in the root directory of the folder and called 'dotfile-pkg.json'.
+
+One of these JSON files should contain a list of objects. Each object can either
+have a type "file", "script", or a type "package". If it has a type "file" it is
+in reference to moving a file to another place. If it's a "script", it runs a
+script from a given location. If it's a "package", it installs another package.
+
+File form:
+
+[
+  // A single file to be installed.
+  {
+    "type": "file",
+    "src": "<path relative to package directory>",
+    "dst": "<path relative to the user's home directory>"
+  },
+
+  // Running a script.
+  {
+    "type": "script",
+    "src": "<path relative to package directory>"
+  },
+
+  // Installing another package.
+  {
+    "type": "package",
+    "src": "<github repo name>"
+  }
+]
