@@ -5,8 +5,12 @@
 package pkginstall
 
 import (
-	"fmt"
+	"errors"
 	"github.com/crockeo/dotfile-manager/pkgfile"
+)
+
+var (
+	MalformedPkgOperationError error = errors.New("Malformed package operation.")
 )
 
 //MoveFile
@@ -36,27 +40,27 @@ func PerformPackageOperation(pkgOperation pkgfile.PkgOperation) error {
 	case pkgfile.MoveFileType:
 		v, succ := pkgOperation.(pkgfile.MoveFile)
 		if !succ {
-			fmt.Println(":(")
+			return MalformedPkgOperationError
 		}
 
 		return performMoveFile(v)
 	case pkgfile.RunScriptType:
 		v, succ := pkgOperation.(pkgfile.RunScript)
 		if !succ {
-			fmt.Println(":(")
+			return MalformedPkgOperationError
 		}
 
 		return performRunScript(v)
 	case pkgfile.InstallPackageType:
 		v, succ := pkgOperation.(pkgfile.InstallPackage)
 		if !succ {
-			fmt.Println(":(")
+			return MalformedPkgOperationError
 		}
 
 		return performInstallPackage(v)
 	}
 
-	return nil
+	return MalformedPkgOperationError
 }
 
 // Performing a whole set of package operations (as described in a PkgFile).
