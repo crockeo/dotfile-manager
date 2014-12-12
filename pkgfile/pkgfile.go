@@ -43,4 +43,7 @@ func (dp InstallPackage) GetType() string {
 }
 
 // The type that represents a whole package file.
-type PkgFile []PkgOperation
+type PkgFile struct {
+	Name string         // The name of the package.
+	Ops  []PkgOperation // Each operation that the file wants to perform.
+}

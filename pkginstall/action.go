@@ -62,7 +62,7 @@ func PerformPackageOperation(pkgOperation pkgfile.PkgOperation) error {
 // Performing a whole set of package operations (as described in a PkgFile).
 func PerformPackageOperations(pkgFile pkgfile.PkgFile) error {
 	var err error
-	for _, v := range pkgFile {
+	for _, v := range pkgFile.Ops {
 		err = PerformPackageOperation(v)
 		if err != nil {
 			return err
