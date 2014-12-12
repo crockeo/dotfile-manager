@@ -30,7 +30,7 @@ func cloneRepo(name string) error {
 // Getting the directory of the repo by its name.
 func getRepoName(name string) string {
 	ss := strings.Split(name, "/")
-	return strings.Trim(ss[len(ss)-1], ".git")
+	return strings.TrimSuffix(ss[len(ss)-1], ".git")
 }
 
 // Installing a package from a Git repository at a given location.
