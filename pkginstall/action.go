@@ -8,6 +8,7 @@ import (
 	"errors"
 	"github.com/crockeo/dotfile-manager/files"
 	"github.com/crockeo/dotfile-manager/pkgfile"
+	"os/exec"
 )
 
 var (
@@ -21,6 +22,13 @@ func performMoveFile(moveFile pkgfile.MoveFile) error {
 
 // Performing a RunScript operation.
 func performRunScript(runScript pkgfile.RunScript) error {
+	cmd := exec.Command("sh", runScript.Src)
+	err := cmd.Run()
+
+	if err != nil {
+		return errors.New("The script '" + runScript.Src + "' returned with an error.")
+	}
+
 	return nil
 }
 
