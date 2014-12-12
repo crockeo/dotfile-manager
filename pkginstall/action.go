@@ -13,10 +13,6 @@ var (
 	MalformedPkgOperationError error = errors.New("Malformed package operation.")
 )
 
-//MoveFile
-//RunScript
-//InstallPackage
-
 // Performing a MoveFile operation.
 func performMoveFile(moveFile pkgfile.MoveFile) error {
 	return nil
