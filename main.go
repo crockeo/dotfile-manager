@@ -4,6 +4,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/crockeo/dotfile-manager/pkginstall"
 	"log"
 	"os"
@@ -14,6 +15,11 @@ func main() {
 	if len(os.Args) != 3 {
 		log.Println("Proper command usage: dotfile-manager install <pkg location>")
 	} else {
-		pkginstall.InstallPackage(os.Args[2])
+		err := pkginstall.InstallPackage(os.Args[2])
+		if err != nil {
+			fmt.Println(err.Error())
+		} else {
+			fmt.Println("Package successfully installed!")
+		}
 	}
 }
