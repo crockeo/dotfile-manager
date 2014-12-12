@@ -4,7 +4,7 @@
 package pkginstall
 
 import (
-	"log"
+	"github.com/crockeo/dotfile-manager/pkgfile"
 	"os/exec"
 )
 
@@ -20,10 +20,20 @@ func cloneRepo(name string) error {
 }
 
 // Installing a package from a Git repository at a given location.
-func InstallPackage(name string) {
+func InstallPackage(name string) error {
 	err := cloneRepo(name)
 
 	if err != nil {
-		log.Fatal("Could not clone GitHub repo at '" + name + "'!")
+		return err
 	}
+
+	pkg, err := pkgfile.LoadPackage(name)
+
+	if err != nil {
+		return err
+	}
+
+	PerformPackageOperations(pkg)
+
+	return nil
 }

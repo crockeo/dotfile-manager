@@ -29,7 +29,7 @@ func performRunScript(runScript pkgfile.RunScript) error {
 
 // Performing an InstallPackage operation.
 func performInstallPackage(installPackage pkgfile.InstallPackage) error {
-	return nil
+	return InstallPackage(installPackage.Url)
 }
 
 // Performing a single package operation.
