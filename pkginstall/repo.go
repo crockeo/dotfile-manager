@@ -12,7 +12,7 @@ import (
 
 // Formatting the URL for a git clone.
 func formatURL(name string) string {
-	return "https://github.com/" + name
+	return "http://github.com/" + name
 }
 
 // Performing a Git clone on a given repo name.

@@ -6,6 +6,7 @@ package pkginstall
 
 import (
 	"errors"
+	"github.com/crockeo/dotfile-manager/files"
 	"github.com/crockeo/dotfile-manager/pkgfile"
 )
 
@@ -15,7 +16,7 @@ var (
 
 // Performing a MoveFile operation.
 func performMoveFile(moveFile pkgfile.MoveFile) error {
-	return nil
+	return files.Move(moveFile.Src, moveFile.Dst)
 }
 
 // Performing a RunScript operation.
