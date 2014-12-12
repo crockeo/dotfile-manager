@@ -4,9 +4,9 @@
 package pkgfile
 
 const (
-	MoveFileType        string = "MoveFile"
-	RunScriptType       string = "RunScript"
-	DownloadPackageType string = "DownloadPackage"
+	MoveFileType       string = "MoveFile"
+	RunScriptType      string = "RunScript"
+	InstallPackageType string = "InstallPackage"
 )
 
 type PkgOperation interface {
@@ -34,12 +34,12 @@ func (rs RunScript) GetType() string {
 }
 
 // A type to represent downloading another package from GitHub.
-type DownloadPackage struct {
+type InstallPackage struct {
 	Url string
 }
 
-func (dp DownloadPackage) GetType() string {
-	return DownloadPackageType
+func (dp InstallPackage) GetType() string {
+	return InstallPackageType
 }
 
 // The type that represents a whole package file.
