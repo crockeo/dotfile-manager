@@ -4,16 +4,16 @@
 package pkgfile
 
 const (
-	MoveFileType string = "MoveFile"
+	CopyFileType string = "MoveFile"
 )
 
 // The type to describe a file move.
-type MoveFile struct {
+type CopyFile struct {
 	Src string `json:"src"`
 	Dst string `json:"dst"`
 }
 
 // Converting a move file to a string.
-func (mf MoveFile) String() string {
-	return "MoveFile " + mf.Src + " -> " + mf.Dst
+func (mf CopyFile) String() string {
+	return "CopyFile " + mf.Src + " -> " + mf.Dst
 }

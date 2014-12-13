@@ -1,2 +1,6 @@
 # Ignoring the compiled binary.
 dotfile-manager
+
+# Ignoring some common test libraries.
+dotfile-test/
+vimconfig/

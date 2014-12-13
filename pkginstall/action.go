@@ -17,8 +17,8 @@ var (
 )
 
 // Performing a MoveFile operation.
-func performMoveFile(name string, moveFile pkgfile.MoveFile) error {
-	return files.Move(name+"/"+moveFile.Src, moveFile.Dst)
+func performCopyFile(name string, moveFile pkgfile.MoveFile) error {
+	return files.Copy(name+"/"+moveFile.Src, moveFile.Dst)
 }
 
 // Performing a RunScript operation.
@@ -42,9 +42,9 @@ func performInstallPackage(installPackage pkgfile.InstallPackage) error {
 func PerformPackageOperations(pkgFile pkgfile.PkgFile) error {
 	var err error
 
-	for _, v := range pkgFile.MoveFiles {
+	for _, v := range pkgFile.CopyFiles {
 		fmt.Println("Performing: " + v.String())
-		err = performMoveFile(pkgFile.Name, v)
+		err = performCopyFile(pkgFile.Name, v)
 		if err != nil {
 			return err
 		}
