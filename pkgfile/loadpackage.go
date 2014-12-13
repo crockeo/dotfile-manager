@@ -14,7 +14,6 @@ import (
 // Loading a package from a given location.
 func LoadPackage(name string) (PkgFile, error) {
 	path := name + "/" + RelativeLocation
-	fmt.Println(path)
 
 	if !files.Exists(path) {
 		return PkgFile{}, errors.New("Package file does not exist!")
