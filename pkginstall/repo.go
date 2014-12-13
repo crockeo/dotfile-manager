@@ -55,7 +55,5 @@ func InstallPackage(name string) error {
 		return err
 	}
 
-	PerformPackageOperations(pkg)
-
-	return nil
+	return PerformPackageOperations(pkg)
 }
