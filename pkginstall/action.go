@@ -17,13 +17,13 @@ var (
 )
 
 // Performing a MoveFile operation.
-func performMoveFile(moveFile pkgfile.MoveFile) error {
-	return files.Move(moveFile.Src, moveFile.Dst)
+func performMoveFile(name string, moveFile pkgfile.MoveFile) error {
+	return files.Move(name+"/"+moveFile.Src, moveFile.Dst)
 }
 
 // Performing a RunScript operation.
-func performRunScript(runScript pkgfile.RunScript) error {
-	cmd := exec.Command("sh", runScript.Src)
+func performRunScript(name string, runScript pkgfile.RunScript) error {
+	cmd := exec.Command("sh", name+"/"+runScript.Src)
 	err := cmd.Run()
 
 	if err != nil {
@@ -38,45 +38,29 @@ func performInstallPackage(installPackage pkgfile.InstallPackage) error {
 	return InstallPackage(installPackage.Url)
 }
 
-// Performing a single package operation.
-func PerformPackageOperation(pkgOperation pkgfile.PkgOperation) error {
-	t := pkgOperation.GetType()
-
-	switch t {
-	case pkgfile.MoveFileType:
-		v, succ := pkgOperation.(pkgfile.MoveFile)
-		fmt.Println("Running: " + v.String())
-		if !succ {
-			return MalformedPkgOperationError
-		}
-
-		return performMoveFile(v)
-	case pkgfile.RunScriptType:
-		v, succ := pkgOperation.(pkgfile.RunScript)
-		fmt.Println("Running: " + v.String())
-		if !succ {
-			return MalformedPkgOperationError
-		}
-
-		return performRunScript(v)
-	case pkgfile.InstallPackageType:
-		v, succ := pkgOperation.(pkgfile.InstallPackage)
-		fmt.Println("Running: " + v.String())
-		if !succ {
-			return MalformedPkgOperationError
-		}
-
-		return performInstallPackage(v)
-	}
-
-	return MalformedPkgOperationError
-}
-
 // Performing a whole set of package operations (as described in a PkgFile).
 func PerformPackageOperations(pkgFile pkgfile.PkgFile) error {
 	var err error
-	for _, v := range pkgFile.Ops {
-		err = PerformPackageOperation(v)
+
+	for _, v := range pkgFile.MoveFiles {
+		fmt.Println("Performing: " + v.String())
+		err = performMoveFile(pkgFile.Name, v)
+		if err != nil {
+			return err
+		}
+	}
+
+	for _, v := range pkgFile.RunScripts {
+		fmt.Println("Performing: " + v.String())
+		err = performRunScript(pkgFile.Name, v)
+		if err != nil {
+			return err
+		}
+	}
+
+	for _, v := range pkgFile.InstallPackages {
+		fmt.Println("Performing: " + v.String())
+		err = performInstallPackage(v)
 		if err != nil {
 			return err
 		}
