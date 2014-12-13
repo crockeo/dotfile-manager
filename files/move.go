@@ -10,7 +10,7 @@ import (
 
 // This function moves a file from one place to another.
 func Move(src, dst string) error {
-	cmd := exec.Command("mv", "src", "dst")
+	cmd := exec.Command("mv", src, dst)
 
 	err := cmd.Run()
 	if err != nil {
