@@ -31,7 +31,5 @@ func LoadPackage(name string) (PkgFile, error) {
 	decoder := json.NewDecoder(file)
 	decoder.Decode(&pkgFile)
 
-	fmt.Println(pkgFile)
-
 	return pkgFile, nil
 }
