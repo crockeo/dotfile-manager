@@ -7,6 +7,8 @@ const (
 	MoveFileType       string = "MoveFile"
 	RunScriptType      string = "RunScript"
 	InstallPackageType string = "InstallPackage"
+
+	RelativeLocation string = "dotfile.json"
 )
 
 type PkgOperation interface {
