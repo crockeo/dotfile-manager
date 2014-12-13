@@ -9,7 +9,9 @@ import (
 	"fmt"
 	"github.com/crockeo/dotfile-manager/files"
 	"github.com/crockeo/dotfile-manager/pkgfile"
+	"os"
 	"os/exec"
+	"strings"
 )
 
 var (
@@ -17,8 +19,8 @@ var (
 )
 
 // Performing a MoveFile operation.
-func performCopyFile(name string, moveFile pkgfile.MoveFile) error {
-	return files.Copy(name+"/"+moveFile.Src, moveFile.Dst)
+func performCopyFile(name string, copyFile pkgfile.CopyFile) error {
+	return files.Copy(name+"/"+copyFile.Src, strings.Replace(copyFile.Dst, "~", os.Getenv("HOME"), -1))
 }
 
 // Performing a RunScript operation.

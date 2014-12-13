@@ -10,7 +10,7 @@ const (
 // A type that represents the form a package installation can take.
 type PkgFile struct {
 	Name            string           `json:"name"`
-	MoveFiles       []CopyFile       `json:"moveFiles"`
+	CopyFiles       []CopyFile       `json:"moveFiles"`
 	RunScripts      []RunScript      `json:"runScripts"`
 	InstallPackages []InstallPackage `json:"installPackages"`
 }
