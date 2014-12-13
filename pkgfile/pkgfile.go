@@ -21,6 +21,10 @@ type MoveFile struct {
 	Dst string
 }
 
+func (mf MoveFile) String() string {
+	return "MoveFile " + mf.Src + " -> " + mf.Dst
+}
+
 func (mf MoveFile) GetType() string {
 	return MoveFileType
 }
@@ -29,6 +33,10 @@ func (mf MoveFile) GetType() string {
 // permissions.)
 type RunScript struct {
 	Src string
+}
+
+func (rs RunScript) String() string {
+	return "RunScript " + rs.Src
 }
 
 func (rs RunScript) GetType() string {
@@ -40,7 +48,11 @@ type InstallPackage struct {
 	Url string
 }
 
-func (dp InstallPackage) GetType() string {
+func (ip InstallPackage) String() string {
+	return "InstallPackage " + ip.Url
+}
+
+func (ip InstallPackage) GetType() string {
 	return InstallPackageType
 }
 
