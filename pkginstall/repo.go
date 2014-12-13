@@ -6,8 +6,8 @@ package pkginstall
 import (
 	"errors"
 	"fmt"
+	"github.com/crockeo/dotfile-manager/files"
 	"github.com/crockeo/dotfile-manager/pkgfile"
-	"os"
 	"os/exec"
 	"strings"
 )
@@ -37,18 +37,9 @@ func getRepoName(name string) string {
 	return strings.TrimSuffix(ss[len(ss)-1], ".git")
 }
 
-// Checking if a given repo is already cloned to the disk.
-func isAlreadyCloned(name string) bool {
-	if _, err := os.Stat(getRepoName(name)); err != nil {
-		return true
-	}
-
-	return false
-}
-
 // Installing a package from a Git repository at a given location.
 func InstallPackage(name string) error {
-	if !isAlreadyCloned(name) {
+	if !files.Exists(getRepoName(name)) {
 		err := cloneRepo(name)
 
 		if err != nil {
