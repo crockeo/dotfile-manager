@@ -10,7 +10,7 @@ import (
 
 // The copy function itself.
 func Copy(src, dst string) error {
-	cmd := exec.Command("cp", "-r", src, dst)
+	cmd := exec.Command("cp", "-R", src, dst)
 
 	err := cmd.Run()
 	if err != nil {
