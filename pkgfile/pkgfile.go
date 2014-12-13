@@ -58,6 +58,6 @@ func (ip InstallPackage) GetType() string {
 
 // The type that represents a whole package file.
 type PkgFile struct {
-	Name string         // The name of the package.
-	Ops  []PkgOperation // Each operation that the file wants to perform.
+	Name string         `json:"name"` // The name of the package.
+	Ops  []PkgOperation `json:"ops"`  // Each operation that the file wants to perform.
 }
