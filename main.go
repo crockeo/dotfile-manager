@@ -15,7 +15,7 @@ func main() {
 	if len(os.Args) != 3 {
 		fmt.Println("Proper command usage: dotfile-manager install <pkg location>")
 	} else {
-		err := logging.Open(".dotfile-manager.log")
+		err := logging.Open(os.Getenv("HOME") + "/.dotfile-manager.log")
 		if err != nil {
 			fmt.Println(err.Error())
 			return
