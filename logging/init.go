@@ -5,6 +5,7 @@ package logging
 
 import (
 	"errors"
+	"github.com/crockeo/dotfile-manager/files"
 	"os"
 )
 
@@ -14,14 +15,25 @@ var (
 
 // Initializing the logger such that it has a file handle open to use.
 func Open(path string) error {
-	file, err := os.Create(path)
+	if files.Exists(path) {
+		file, err := os.OpenFile(path, os.O_RDWR|os.O_APPEND, 0660)
 
-	if err != nil {
-		return errors.New("Failed to create logging file at " + path)
+		if err != nil {
+			return errors.New("Failed to open file at " + path)
+		}
+
+		fileHandle = file
+		return nil
+	} else {
+		file, err := os.Create(path)
+
+		if err != nil {
+			return errors.New("Failed to create logging file at " + path)
+		}
+
+		fileHandle = file
+		return nil
 	}
-
-	fileHandle = file
-	return nil
 }
 
 // Cleaning up the logger.
