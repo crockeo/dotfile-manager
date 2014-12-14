@@ -15,5 +15,5 @@ type CopyFile struct {
 
 // Converting a move file to a string.
 func (mf CopyFile) String() string {
-	return "CopyFile " + mf.Src + " -> " + mf.Dst
+	return "CopyFile '" + mf.Src + "' -> '" + mf.Dst + "'"
 }

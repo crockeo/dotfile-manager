@@ -39,12 +39,16 @@ func getRepoName(name string) string {
 
 // Installing a package from a Git repository at a given location.
 func InstallPackage(name string) error {
+	logging.Write("Attempting to install package '" + name + "'")
+
 	if !files.Exists(getRepoName(name)) {
 		err := cloneRepo(name)
 
 		if err != nil {
 			return err
 		}
+
+		logging.Write("Repo successfully cloned!")
 	} else {
 		logging.Write("Repository '" + name + "' already exists - using cached files!")
 	}

@@ -14,5 +14,5 @@ type InstallPackage struct {
 
 // Converting an InstallPackage to a nice string that can be printed out later.
 func (ip InstallPackage) String() string {
-	return "InstallPackage " + ip.Url
+	return "InstallPackage '" + ip.Url + "'"
 }

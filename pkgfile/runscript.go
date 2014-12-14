@@ -15,5 +15,5 @@ type RunScript struct {
 
 // Converting a RunScript into a nice string such that it can be printed later.
 func (rs RunScript) String() string {
-	return "RunScript " + rs.Src
+	return "RunScript '" + rs.Src + "'"
 }
