@@ -5,8 +5,8 @@ package pkginstall
 
 import (
 	"errors"
-	"fmt"
 	"github.com/crockeo/dotfile-manager/files"
+	"github.com/crockeo/dotfile-manager/logging"
 	"github.com/crockeo/dotfile-manager/pkgfile"
 	"os/exec"
 	"strings"
@@ -19,7 +19,7 @@ func formatURL(name string) string {
 
 // Performing a Git clone on a given repo name.
 func cloneRepo(name string) error {
-	fmt.Println("Attempting to clone repository '" + name + "'!")
+	logging.Write("Attempting to clone repository '" + name + "'!")
 
 	cmd := exec.Command("git", "clone", formatURL(name))
 	err := cmd.Run()
@@ -46,7 +46,7 @@ func InstallPackage(name string) error {
 			return err
 		}
 	} else {
-		fmt.Println("Repository '" + name + "' already exists - using cached files!")
+		logging.Write("Repository '" + name + "' already exists - using cached files!")
 	}
 
 	pkg, err := pkgfile.LoadPackage(getRepoName(name))

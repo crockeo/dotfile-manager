@@ -14,7 +14,13 @@ var (
 
 // Initializing the logger such that it has a file handle open to use.
 func Open(path string) error {
-	// TODO: Implement opening the logging file.
+	file, err := os.Create(path)
+
+	if err != nil {
+		return errors.New("Failed to create logging file at " + path)
+	}
+
+	fileHandle = file
 	return nil
 }
 

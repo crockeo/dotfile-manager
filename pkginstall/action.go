@@ -6,8 +6,8 @@ package pkginstall
 
 import (
 	"errors"
-	"fmt"
 	"github.com/crockeo/dotfile-manager/files"
+	"github.com/crockeo/dotfile-manager/logging"
 	"github.com/crockeo/dotfile-manager/pkgfile"
 	"os"
 	"os/exec"
@@ -45,7 +45,7 @@ func PerformPackageOperations(pkgFile pkgfile.PkgFile) error {
 	var err error
 
 	for _, v := range pkgFile.CopyFiles {
-		fmt.Println("Performing: " + v.String())
+		logging.Write("Performing: " + v.String())
 		err = performCopyFile(pkgFile.Name, v)
 		if err != nil {
 			return err
@@ -53,7 +53,7 @@ func PerformPackageOperations(pkgFile pkgfile.PkgFile) error {
 	}
 
 	for _, v := range pkgFile.RunScripts {
-		fmt.Println("Performing: " + v.String())
+		logging.Write("Performing: " + v.String())
 		err = performRunScript(pkgFile.Name, v)
 		if err != nil {
 			return err
@@ -61,7 +61,7 @@ func PerformPackageOperations(pkgFile pkgfile.PkgFile) error {
 	}
 
 	for _, v := range pkgFile.InstallPackages {
-		fmt.Println("Performing: " + v.String())
+		logging.Write("Performing: " + v.String())
 		err = performInstallPackage(v)
 		if err != nil {
 			return err
