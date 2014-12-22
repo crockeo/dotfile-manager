@@ -9,7 +9,7 @@ const (
 
 // A type to represent downloading another package from GitHub.
 type InstallPackage struct {
-	Url string
+	Url string `json:"url"`
 }
 
 // Converting an InstallPackage to a nice string that can be printed out later.
